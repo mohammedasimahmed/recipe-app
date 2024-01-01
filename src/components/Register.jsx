@@ -10,7 +10,7 @@ const Register = () => {
   async function RegisterUser() {
     // console.log("user register")
     try {
-      await axios.post("http://localhost:3001/auth/register", {
+      await axios.post("https://recipe-app-backend1.onrender.com/auth/register", {
         username,
         password,
       });

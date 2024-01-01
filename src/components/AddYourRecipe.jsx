@@ -32,7 +32,7 @@ const AddYourRecipe = () => {
       };
 
       const response = await axios.post(
-        "http://localhost:3001/recipes",
+        "https://recipe-app-backend1.onrender.com",
         {
           name: dishName,
           instructions,
