@@ -74,11 +74,9 @@ const ViewRecipe = () => {
   return (
     <div className="w-screen min-h-screen bg-gray-900 flex justify-center items-start">
       <div class="max-w-2xl overflow-hidden rounded-lg shadow-md">
-        <img
-          class="object-cover w-full h-64"
-          src={recipe.imageUrl}
-          alt="Article"
-        />
+        <div className="flex justify-center items-center">
+          <img class="w-1/2 h-1/2 object-cover " src={recipe.imageUrl} alt="Article" />
+        </div>
 
         <div class="p-6">
           <div>
