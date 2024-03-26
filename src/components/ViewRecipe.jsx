@@ -19,7 +19,7 @@ const ViewRecipe = () => {
         userOwner: recipe.userOwner,
       };
       const response = await axios.put(
-        `http://localhost:3001/recipes/${recipe._id}`,
+        `https://recipe-app-backend1.onrender.com/recipes/${recipe._id}`,
         updatedRecipeData
       );
 
@@ -35,7 +35,7 @@ const ViewRecipe = () => {
 
   async function deleteRecipe() {
     try {
-      await axios.delete(`http://localhost:3001/recipes/${recipe._id}`);
+      await axios.delete(`https://recipe-app-backend1.onrender.com/recipes/${recipe._id}`);
       alert("deleted recipe");
       navigate("/addrecipe");
     } catch (error) {
@@ -48,7 +48,7 @@ const ViewRecipe = () => {
     async function getRecipe() {
       try {
         const resp = await axios.get(
-          `http://localhost:3001/recipes/${recipe._id}`
+          `https://recipe-app-backend1.onrender.com/recipes/${recipe._id}`
         );
         setNewInstructions(resp.data.instructions);
       } catch (error) {

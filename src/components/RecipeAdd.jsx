@@ -10,7 +10,7 @@ const RecipeAdd = () => {
   useEffect(() => {
     const fetchSavedRecipes = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/recipes`);
+        const response = await axios.get(`https://recipe-app-backend1.onrender.com/recipes`);
         console.log(response.data);
         setAllRecipes(response.data);
         setVal(true);

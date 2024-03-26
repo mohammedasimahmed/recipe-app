@@ -12,7 +12,7 @@ const Register = () => {
     e.preventDefault();
     setVal(true);
     try {
-      await axios.post("http://localhost:3001/auth/register", {
+      await axios.post("https://recipe-app-backend1.onrender.com/auth/register", {
         username,
         password,
       });
