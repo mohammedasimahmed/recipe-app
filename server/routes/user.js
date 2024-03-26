@@ -39,7 +39,7 @@ router.post("/login", async (req, res) => {
 export { router as userRouter };
 
 export const verifyToken = (req, res, next) => {
-  const authHeader = req.headers.authorization;
+  const authHeader = req.headers.authorization.split(" ")[1];
   if (authHeader) {
     jwt.verify(authHeader, "secret", (err) => {
       if (err) {

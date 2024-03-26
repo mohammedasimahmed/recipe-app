@@ -10,9 +10,7 @@ const RecipeAdd = () => {
   useEffect(() => {
     const fetchSavedRecipes = async () => {
       try {
-        const response = await axios.get(
-          `https://recipe-app-backend1.onrender.com/recipes`
-        );
+        const response = await axios.get(`http://localhost:3001/recipes`);
         console.log(response.data);
         setAllRecipes(response.data);
         setVal(true);
@@ -43,7 +41,7 @@ const RecipeAdd = () => {
           {val ? (
             allrecipes.map((recipe) => {
               return (
-                <Tilt>
+                <Tilt tiltMaxAngleX={8} tiltMaxAngleY={8}>
                   <div
                     className="max-w-sm m-4  border  rounded-lg shadow bg-gray-800 border-gray-700"
                     onClick={() =>

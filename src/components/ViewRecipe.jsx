@@ -10,15 +10,6 @@ const ViewRecipe = () => {
   const navigate = useNavigate();
 
   const handleUpdate = async () => {
-    // Perform the update operation with newInstructions
-    // For simplicity, you can log it to the console in this example
-    console.log("Updated Instructions:", newInstructions);
-
-    // You can send an API request to update the instructions in the backend
-    // Example API request:
-    // axios.put(`http://your-api-endpoint/${recipe._id}`, { instructions: newInstructions });
-
-    // Close the modal after updating
     try {
       const updatedRecipeData = {
         name: recipe.name,
@@ -27,18 +18,16 @@ const ViewRecipe = () => {
         cookingTime: recipe.cookingTime,
         userOwner: recipe.userOwner,
       };
-      console.log("id", recipe._id);
       const response = await axios.put(
-        `https://recipe-app-backend1.onrender.com/recipes/${recipe._id}`,
+        `http://localhost:3001/recipes/${recipe._id}`,
         updatedRecipeData
       );
 
-      console.log(response.data); // You can handle the response as needed
+      console.log(response.data);
       alert("Updated Recipe");
     } catch (error) {
       console.error("Error updating recipe:", error);
       alert("Error updating recipe");
-      // Handle the error as needed
     }
 
     setShowModal(false);
@@ -46,9 +35,7 @@ const ViewRecipe = () => {
 
   async function deleteRecipe() {
     try {
-      await axios.delete(
-        `https://recipe-app-backend1.onrender.com/recipes/${recipe._id}`
-      );
+      await axios.delete(`http://localhost:3001/recipes/${recipe._id}`);
       alert("deleted recipe");
       navigate("/addrecipe");
     } catch (error) {
@@ -61,7 +48,7 @@ const ViewRecipe = () => {
     async function getRecipe() {
       try {
         const resp = await axios.get(
-          `https://recipe-app-backend1.onrender.com/recipes/${recipe._id}`
+          `http://localhost:3001/recipes/${recipe._id}`
         );
         setNewInstructions(resp.data.instructions);
       } catch (error) {
@@ -75,20 +62,23 @@ const ViewRecipe = () => {
     <div className="w-screen min-h-screen bg-gray-900 flex justify-center items-start">
       <div class="max-w-2xl overflow-hidden rounded-lg shadow-md">
         <div className="flex justify-center items-center">
-          <img class="w-1/2 h-1/2 object-cover " src={recipe.imageUrl} alt="Article" />
+          <img
+            class="w-1/2 h-1/2 object-cover "
+            src={recipe.imageUrl}
+            alt="Article"
+          />
         </div>
 
         <div class="p-6">
           <div>
-            <a
-              href="#"
+            <span
               class="block mt-2 text-xl font-semibold text-gray-800 transition-colors duration-300 transform dark:text-white hover:underline"
               tabindex="0"
               role="link"
             >
               {recipe.name}
-            </a>
-            <p class="mt-2 text-sm ">{newInstructions}</p>
+            </span>
+            <p class="mt-2 text-sm">{newInstructions}</p>
           </div>
 
           {recipe.userOwner === localStorage.getItem("userID") && (
@@ -110,7 +100,6 @@ const ViewRecipe = () => {
         </div>
       </div>
 
-      {/* Modal for Update */}
       {showModal && (
         <div className="fixed inset-0 z-50 overflow-auto bg-black bg-opacity-50 flex items-center justify-center">
           <div className=" bg-gray-600 p-8 rounded-lg w-full max-w-md">

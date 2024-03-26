@@ -6,37 +6,37 @@ const Register = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [val,setVal] = useState(false)
+  const [val, setVal] = useState(false);
 
-  async function RegisterUser() {
-    // console.log("user register")
-    setVal(true)
+  async function RegisterUser(e) {
+    e.preventDefault();
+    setVal(true);
     try {
-      await axios.post(
-        "https://recipe-app-backend1.onrender.com/auth/register",
-        {
-          username,
-          password,
-        }
-      );
+      await axios.post("http://localhost:3001/auth/register", {
+        username,
+        password,
+      });
       alert("Registration Completed! Now login.");
-      setVal(false)
+      setVal(false);
       navigate("/login");
     } catch (error) {
       console.error(error);
       alert("User already registered");
-      setVal(false)
+      setVal(false);
     }
   }
 
   return (
     <div>
-      <section class=" w-screen h-screen bg-gray-900 ">
+      <div class=" w-screen h-screen bg-gray-900 ">
         <div class="flex flex-col items-center justify-start  px-6 py-8 mx-auto md:h-screen lg:py-0">
-          <a href="#" class="flex items-center mb-6 text-2xl font-semibold ">
+          <div href="#" class="flex items-center mb-6 text-2xl font-semibold ">
             Register
-          </a>
-          <div class="w-full rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0 bg-gray-800 border-gray-700">
+          </div>
+          <form
+            class="w-full rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0 bg-gray-800 border-gray-700"
+            onSubmit={(e) => RegisterUser(e)}
+          >
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 class="text-xl font-bold leading-tight tracking-tight md:text-2xl">
                 Register into your account
@@ -67,25 +67,22 @@ const Register = () => {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
-                <button
-                  class="w-full bg-blue-600 text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                  onClick={RegisterUser}
-                >
+                <button class="w-full bg-blue-600 text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                   Register
                 </button>
                 <p class="text-sm font-light text-white">
                   Already Have an account
-                  <a
+                  <span
                     href="#"
                     class="font-medium ml-2 text-primary-600 hover:underline text-primary-500"
                     onClick={() => navigate("/login")}
                   >
                     Login
-                  </a>
+                  </span>
                 </p>
               </div>
             </div>
-          </div>
+          </form>
           {val && (
             <div role="status" className="mt-20">
               <svg
@@ -108,7 +105,7 @@ const Register = () => {
             </div>
           )}
         </div>
-      </section>
+      </div>
     </div>
   );
 };

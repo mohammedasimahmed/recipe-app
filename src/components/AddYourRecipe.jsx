@@ -28,11 +28,11 @@ const AddYourRecipe = () => {
     try {
       const token = localStorage.getItem("token"); // Replace with your actual key name
       const headers = {
-        Authorization: `${token}`,
+        Authorization: `Bearer ${token}`,
       };
 
       const response = await axios.post(
-        `https://recipe-app-backend1.onrender.com/recipes/addrecipe`,
+        `http://localhost:3001/recipes/addrecipe`,
         {
           name: dishName,
           instructions,
@@ -53,12 +53,12 @@ const AddYourRecipe = () => {
   }
 
   return (
-    <div className="w-screen min-h-screen">
-      <section className=" w-screen  bg-gray-900 ">
-        <div className="flex flex-col items-center justify-start  px-6 py-8 mx-auto md:h-screen lg:py-0">
-          <a className="flex items-center mb-6 text-2xl font-semibold ">
+    <div className="w-screen h-fit">
+      <div className="w-screen h-fit bg-gray-900 ">
+        <div className="flex flex-col items-center justify-start  px-6 py-8 mx-auto md:min-h-screen lg:py-0">
+          <div className="flex items-center mb-6 text-2xl font-semibold ">
             Add Recipe
-          </a>
+          </div>
           <div className="w-full rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0 bg-gray-800 border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <form className="space-y-4 md:space-y-6" action="#">
@@ -152,7 +152,7 @@ const AddYourRecipe = () => {
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 };
